@@ -19,23 +19,23 @@ enableScreens();
 const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
-    const [haveCode, setHaveCode] = useState<Boolean>(false);
+    const [boards, setBoards] = useState<object[]>([]);
 
     return (
         <NavigationContainer>
             <SafeAreaView style={styles.container}>
-                {!haveCode ? (
-                    <Auth setHaveCode={setHaveCode} />
+                {!boards.length ? (
+                    <Auth setBoards={setBoards} />
                 ) : (
                     <Tab.Navigator tabBar={(props) => <NavBar {...props} />}>
                         <Tab.Screen
                             name="Recipes"
-                            component={Recipes}
-                            options={() => ({
+                            children={() => <Recipes boards={boards} />}
+                            options={{
                                 headerRight: () => <AddNewButton />,
-                            })}
+                            }}
                         />
-                        <Tab.Screen name="Calendar " component={NewRecipe} />
+                        <Tab.Screen name="Calendar" component={NewRecipe} />
                         <Tab.Screen name="Groceries" component={NewRecipe} />
                     </Tab.Navigator>
                 )}

@@ -8,8 +8,9 @@ import Header from '../../components/header/Header';
 import Body from '../../components/body/Body';
 
 import { styles } from '../../appStyles';
+import { RecipesProps } from '../../interfaces';
 
-const Recipes: React.FC = () => {
+const Recipes: React.FC<RecipesProps> = ({ boards }) => {
     const [loading, setLoading] = useState<boolean>(false);
 
     return (
@@ -20,7 +21,7 @@ const Recipes: React.FC = () => {
                     <ActivityIndicator size={'large'} color={'#f5f5f5'} />
                 </View>
             ) : (
-                <Body />
+                <Body boards={boards} />
             )}
         </SafeAreaView>
     );

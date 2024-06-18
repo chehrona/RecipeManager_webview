@@ -5,6 +5,12 @@ export const styles = StyleSheet.create({
         width: 165,
         height: 220,
     },
+    imageWrapper: {
+        shadowColor: '#cac9c9',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+    },
     image: {
         height: 220,
         width: 165,
@@ -12,7 +18,7 @@ export const styles = StyleSheet.create({
     },
     name: {
         color: '#cac9c9',
-        fontSize: 20,
+        fontSize: 18,
         marginTop: 5,
         fontWeight: 'bold',
     },

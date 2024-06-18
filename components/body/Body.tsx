@@ -1,28 +1,24 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import { styles } from './bodyStyles';
-import RecipeCard from '../recipeCard/RecipeCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BodyProps } from '../../interfaces';
+import BoardCard from '../boardCard/BoardCard';
 
-const recipes = [
-    {
-        name: 'Chicken enchiladas',
-        img: 'https://i.pinimg.com/564x/43/ff/2f/43ff2fe3ee234faa7313725adc82cb60.jpg',
-    },
-    { name: 'Greek meatballs', img: './path/to/image.png' },
-    { name: 'Greek meatballs-2', img: './path/to/image.png' },
-];
-
-const Body: React.FC = () => {
+const Body: React.FC<BodyProps> = ({ boards }) => {
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
-                data={recipes}
+                data={boards}
                 renderItem={({ item }) => (
-                    <RecipeCard img={item.img} name={item.name} />
+                    <BoardCard
+                        img={item.media.image_cover_url}
+                        name={item.name}
+                        id={item.id}
+                    />
                 )}
                 contentContainerStyle={styles.cardList}
-                keyExtractor={(item) => item.name}
+                keyExtractor={(item) => item.id}
             />
         </SafeAreaView>
     );
