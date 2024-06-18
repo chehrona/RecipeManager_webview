@@ -1,34 +1,47 @@
-import React from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
-import { WebView } from 'react-native-webview';
-import config from './config';
+import React, { useState } from 'react';
 
-const AUTH_URL = `https://www.pinterest.com/oauth/?client_id=${config.client_id}&redirect_uri=${config.redirect_uri}&response_type=code&scope=boards:read,pins:read`;
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { enableScreens } from 'react-native-screens';
+
+// Components
+import NavBar from './components/navBar/NavBar';
+import Recipes from './screens/recipes/Recipes';
+import NewRecipe from './screens/calendar/Calendar';
+
+import { styles } from './appStyles.tsx';
+import AddNewButton from './screens/newRecipe/AddNewButton';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Auth from './screens/auth/Auth.tsx';
+
+enableScreens();
+
+const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
-    const handleUrlChange = (e: { url: string }) => {
-        console.log(e.url, 'url');
-    };
+    const [haveCode, setHaveCode] = useState<Boolean>(false);
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Text>Here</Text>
-            <WebView
-                source={{ uri: AUTH_URL }}
-                onNavigationStateChange={handleUrlChange}
-                style={styles.webview}
-            />
-        </SafeAreaView>
+        <NavigationContainer>
+            <SafeAreaView style={styles.container}>
+                {!haveCode ? (
+                    <Auth setHaveCode={setHaveCode} />
+                ) : (
+                    <Tab.Navigator tabBar={(props) => <NavBar {...props} />}>
+                        <Tab.Screen
+                            name="Recipes"
+                            component={Recipes}
+                            options={() => ({
+                                headerRight: () => <AddNewButton />,
+                            })}
+                        />
+                        <Tab.Screen name="Calendar " component={NewRecipe} />
+                        <Tab.Screen name="Groceries" component={NewRecipe} />
+                    </Tab.Navigator>
+                )}
+            </SafeAreaView>
+        </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    webview: {
-        flex: 1,
-    },
-});
 
 export default App;
