@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ActivityIndicator, View } from 'react-native';
@@ -8,11 +8,14 @@ import Header from '../../components/header/Header';
 import Body from '../../components/body/Body';
 
 import { styles } from '../../appStyles';
-import { RecipesProps } from '../../interfaces';
+import { Board } from '../../interfaces';
 
-const Recipes: React.FC<RecipesProps> = ({ boards }) => {
-    const [loading, setLoading] = useState<boolean>(false);
+interface RecipesProps {
+    boards: Board[];
+    loading: boolean;
+}
 
+const Recipes: React.FC<RecipesProps> = ({ boards, loading }) => {
     return (
         <SafeAreaView style={styles.recipeContainer}>
             <Header />

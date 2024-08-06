@@ -1,31 +1,27 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { styles } from './boardCardStyles';
+import { styles } from './pinCardStyles';
 
 interface CardProps {
-    name: string;
+    title: string;
     img: string;
     id: string;
-    setBoardId: (boardId: string) => void;
+    setPinId: (pinId: string) => void;
 }
 
-const BoardCard: React.FC<CardProps> = ({ img, name, id, setBoardId }) => {
-    const handleClick = (boardId: string) => {
-        setBoardId(boardId);
-    };
-
+const PinCard: React.FC<CardProps> = ({ img, title, id, setPinId }) => {
     return (
         <TouchableOpacity
             key={id + 'a'}
             style={styles.wrapper}
-            onPress={() => handleClick(id)}
+            onPress={() => setPinId(id)}
         >
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={{ uri: img }} />
             </View>
-            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
     );
 };
 
-export default BoardCard;
+export default PinCard;

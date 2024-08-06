@@ -1,27 +1,25 @@
-import React from 'react';
-import { FlatList } from 'react-native';
-import { styles } from './bodyStyles';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { BodyProps } from '../../interfaces';
-import BoardCard from '../boardCard/BoardCard';
+import React, { useState } from 'react';
+import { Board } from '../../interfaces';
+import BoardsScreen from '../../screens/recipes/screens/BoardsScreen';
+import PinsScreen from '../../screens/recipes/screens/PinsScreen';
+import { createStackNavigator } from 'react-navigation-stack';
+
+interface BodyProps {
+    boards: Board[];
+}
+
+createStackNavigator({
+    Boards: {
+        screen: BoardsScreen,
+    },
+    Pins: {
+        screen: PinsScreen,
+    },
+});
 
 const Body: React.FC<BodyProps> = ({ boards }) => {
-    return (
-        <SafeAreaView style={styles.container}>
-            <FlatList
-                data={boards}
-                renderItem={({ item }) => (
-                    <BoardCard
-                        img={item.media.image_cover_url}
-                        name={item.name}
-                        id={item.id}
-                    />
-                )}
-                contentContainerStyle={styles.cardList}
-                keyExtractor={(item) => item.id}
-            />
-        </SafeAreaView>
-    );
+    const [boardId, setBoardId] = useState<string>('');
+    return <BoardsScreen boards={boards} setBoardId={setBoardId} />;
 };
 
 export default Body;

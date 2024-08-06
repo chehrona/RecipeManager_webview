@@ -10,10 +10,14 @@ export interface Board {
     pin_count: number;
 }
 
-export interface RecipesProps {
-    boards: object[];
-}
-
-export interface BodyProps {
-    boards: Board[];
+export interface Pin {
+    id: string;
+    title: string;
+    media: {
+        images: {
+            [key: string]: {
+                url: string;
+            };
+        };
+    };
 }

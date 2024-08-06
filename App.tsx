@@ -13,28 +13,33 @@ import { styles } from './appStyles.tsx';
 import AddNewButton from './screens/newRecipe/AddNewButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Auth from './screens/auth/Auth.tsx';
+import { Board } from './interfaces.tsx';
 
 enableScreens();
 
 const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
-    const [boards, setBoards] = useState<object[]>([]);
+    const [boards, setBoards] = useState<Board[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     return (
         <NavigationContainer>
             <SafeAreaView style={styles.container}>
                 {!boards.length ? (
-                    <Auth setBoards={setBoards} />
+                    <Auth setBoards={setBoards} setLoading={setLoading} />
                 ) : (
                     <Tab.Navigator tabBar={(props) => <NavBar {...props} />}>
                         <Tab.Screen
                             name="Recipes"
-                            children={() => <Recipes boards={boards} />}
                             options={{
                                 headerRight: () => <AddNewButton />,
                             }}
-                        />
+                        >
+                            {() => (
+                                <Recipes boards={boards} loading={loading} />
+                            )}
+                        </Tab.Screen>
                         <Tab.Screen name="Calendar" component={NewRecipe} />
                         <Tab.Screen name="Groceries" component={NewRecipe} />
                     </Tab.Navigator>
