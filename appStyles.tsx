@@ -12,9 +12,12 @@ export const styles = StyleSheet.create({
     },
     recipeContainer: {
         backgroundColor: '#0d0d0d',
+        // backgroundColor: 'red',
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 10,
+
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     newRecipeContainer: {
         backgroundColor: '#0d0d0d',

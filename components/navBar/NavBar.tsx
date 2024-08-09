@@ -1,12 +1,21 @@
 import React from 'react';
 
+// Native components
 import { View, Text, TouchableOpacity } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {
+    faUtensils,
+    faCalendar,
+    faBasketShopping,
+} from '@fortawesome/free-solid-svg-icons';
+
+// Styles
 import { styles } from './navBarStyles';
 
-const icons = ['utensils', 'calendar', 'basket-shopping'];
+const icons = [faUtensils, faCalendar, faBasketShopping];
 
 const NavBar: React.FC<BottomTabBarProps> = ({
     state,
@@ -56,8 +65,9 @@ const NavBar: React.FC<BottomTabBarProps> = ({
                         onLongPress={onLongPress}
                         style={styles.iconWrapper}
                     >
-                        <FontAwesome6
-                            name={icons[index]}
+                        <FontAwesomeIcon
+                            icon={icons[index]}
+                            size={25}
                             style={
                                 isFocused
                                     ? styles.activeIcon

@@ -24,14 +24,8 @@ export const styles = StyleSheet.create({
     },
     activeIcon: {
         color: '#fbde82',
-        fontSize: 20,
-        margin: 0,
-        padding: 0,
     },
     inactiveIcon: {
-        fontSize: 20,
-        margin: 0,
-        padding: 0,
         color: '#cac9c9',
     },
     iconNameActive: {
@@ -39,11 +33,13 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fbde82',
         textAlign: 'center',
+        fontSize: 15,
     },
     iconNameInactive: {
         marginTop: 5,
         fontWeight: 'bold',
         color: '#cac9c9',
         textAlign: 'center',
+        fontSize: 15,
     },
 });

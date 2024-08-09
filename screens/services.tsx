@@ -23,3 +23,12 @@ export const getPins = async (board_id: string): Promise<{ items: Pin[] }> => {
         return error;
     }
 };
+
+export const getPin = async (pin_id: string): Promise<{ item: Pin }> => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/pins/${pin_id}`);
+        return response.data;
+    } catch (error: any) {
+        return error;
+    }
+};

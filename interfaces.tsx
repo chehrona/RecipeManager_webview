@@ -13,11 +13,12 @@ export interface Board {
 export interface Pin {
     id: string;
     title: string;
-    media: {
-        images: {
-            [key: string]: {
-                url: string;
-            };
-        };
-    };
+    media?: string;
+    product_tags: string[];
 }
+
+export type RootStackParamList = {
+    Boards: { boards: Board[] };
+    Pins: { boardId: string };
+    Pin: { pinId: string };
+};

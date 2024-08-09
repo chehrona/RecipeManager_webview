@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, View } from 'react-native';
 
 // Components
-import Header from '../../components/header/Header';
 import Body from '../../components/body/Body';
 
 import { styles } from '../../appStyles';
@@ -18,7 +17,6 @@ interface RecipesProps {
 const Recipes: React.FC<RecipesProps> = ({ boards, loading }) => {
     return (
         <SafeAreaView style={styles.recipeContainer}>
-            <Header />
             {loading ? (
                 <View style={styles.loader}>
                     <ActivityIndicator size={'large'} color={'#f5f5f5'} />

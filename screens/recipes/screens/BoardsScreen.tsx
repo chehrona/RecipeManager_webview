@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useGlobal } from '../../../App';
 
 // Native components
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,6 +10,7 @@ import { Board } from '../../../interfaces';
 
 // Components
 import BoardCard from '../../../components/boardCard/BoardCard';
+import SearchBar from '../../../components/searchBar/SearchBar';
 
 // Styles
 import { styles } from './screensStyles';
@@ -18,8 +21,15 @@ interface BoardsProps {
 }
 
 const BoardsScreen: React.FC<BoardsProps> = ({ boards, setBoardId }) => {
+    const { setTitle } = useGlobal();
+
+    useEffect(() => {
+        setTitle('Boards');
+    });
+
     return (
         <SafeAreaView style={styles.container}>
+            <SearchBar />
             <FlatList
                 data={boards}
                 renderItem={({ item }) => (
